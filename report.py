@@ -38,9 +38,12 @@ class Report:
             data[code] = groups
         return data
 
-    def _check_data(self):
+    def _check_datafile(self):
         if not os.path.exists(self.datafile):
-            print('Data file with that name doesn\'t exists.')
+            print('Datafile with that name doesn\'t exist.')
+            sys.exit()
+        if not self.datafile.endswith('.csv'):
+            print('Datafile must be a csv file.')
             sys.exit()
 
     def write_report(self):
@@ -49,7 +52,7 @@ class Report:
         difference between own and general for
         each skills group of each employee
         """
-        self._check_data()
+        self._check_datafile()
         with open(self.datafile, newline='') as datafile,\
                 open('report.csv', 'w', newline='') as reportfile,\
                 open('log.txt', 'w') as log:

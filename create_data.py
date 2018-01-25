@@ -25,13 +25,13 @@ class DataWriter:
     def create_csv(self):
         """Create csv with pseudo-ratings for employees"""
         self._check_file()
-        with open(self.filename, 'w', newline='') as file:
+        with open('{0}.csv'.format(self.filename), 'w', newline='') as file:
             writer = csv.writer(file)
             for employee in range(self.employees):
                 record = [employee + 1]
                 record += [random.choice(range(1, self.rating + 1)) for skill in range(self.skills)]
                 writer.writerow(record)
-        print('File with test data "{0}" was created.'.format(self.filename))
+        print('File with test data "{0}.csv" was created.'.format(self.filename))
 
 
 if __name__ == "__main__":
