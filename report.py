@@ -50,12 +50,19 @@ class Report:
         each skills group of each employee.
         """
         self._check_data()
-        with open(self.filename, newline='') as datafile, open('report.csv', 'w', newline='') as reportfile:
+        with open(self.filename, newline='') as datafile,\
+                open('report.csv', 'w', newline='') as reportfile,\
+                open('log.txt', 'w') as log:
             reader = csv.reader(datafile)
 
             data = OrderedDict()
+            errors = 0
             for row in reader:
-                data[row[0]] = list(map(int, row[1:]))
+                try:
+                    data[row[0]] = list(map(float, row[1:]))
+                except Exception:
+                    log.write('Data of employee with code {0} is invalid.'.format(row[0]))
+                    errors += 1
 
             medians = self._calculate_medians(data)
             report = self._make_report(data, medians)
@@ -69,6 +76,8 @@ class Report:
 
             for code, ratings in report.items():
                 writer.writerow([code] + ratings)
+
+            print('Work is over. The reports are built for {0} employees.\nErrors: {1}.'.format(len(data), errors))
 
 
 if __name__ == "__main__":
