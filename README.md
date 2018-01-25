@@ -11,7 +11,7 @@ The script takes one necessary argument with datafile name and three unnecessary
 Default values are 300 employees, 30 skills for each employee and ratings from 1 to 5.
 Key -h or --help will open help menu.
 
-###### Usage
+###### Usage example
 ```
 python3 create_data.py data -e 500
 ```
@@ -26,7 +26,7 @@ The script takes one necessary argument with datafile name and one unnecessary k
 Default value of group size is 3.
 Key -h or --help will open help menu.
 
-###### Usage
+###### Usage example
 ```
 python3 report.py data.csv
 ```
