@@ -7,8 +7,8 @@ from collections import OrderedDict
 
 
 class Report:
-    def __init__(self, filename, group_size=3):
-            self.filename = filename
+    def __init__(self, datafile, group_size=3):
+            self.datafile = datafile
             self.group_size = group_size
 
     def _calculate_medians(self, data):
@@ -39,7 +39,7 @@ class Report:
         return data
 
     def _check_data(self):
-        if not os.path.exists(self.filename):
+        if not os.path.exists(self.datafile):
             print('Data file with that name doesn\'t exists.')
             sys.exit()
 
@@ -47,10 +47,10 @@ class Report:
         """
         Make report with average values and
         difference between own and general for
-        each skills group of each employee.
+        each skills group of each employee
         """
         self._check_data()
-        with open(self.filename, newline='') as datafile,\
+        with open(self.datafile, newline='') as datafile,\
                 open('report.csv', 'w', newline='') as reportfile,\
                 open('log.txt', 'w') as log:
             reader = csv.reader(datafile)
@@ -61,7 +61,7 @@ class Report:
                 try:
                     data[row[0]] = list(map(float, row[1:]))
                 except Exception:
-                    log.write('Data of employee with code {0} is invalid.'.format(row[0]))
+                    log.write('Data of employee with code {0} is invalid.\n'.format(row[0]))
                     errors += 1
 
             medians = self._calculate_medians(data)
@@ -82,7 +82,7 @@ class Report:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("filename", type=str, help="name of file with employees data")
+    parser.add_argument("datafile", type=str, help="name of file with employees data")
     parser.add_argument("-g", "--group_size", type=int, help="count of skills in skills group")
     args = parser.parse_args()
     defined = {k: v for k, v in vars(args).items() if v is not None}
