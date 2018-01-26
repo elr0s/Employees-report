@@ -53,9 +53,8 @@ class Report:
         each skills group of each employee
         """
         self._check_datafile()
-        with open(self.datafile, newline='') as datafile,\
-                open('report.csv', 'w', newline='') as reportfile,\
-                open('log.txt', 'w') as log:
+        with open(self.datafile, newline='') as datafile, open('report.csv', 'w', newline='') as reportfile,\
+                                                          open('log.txt', 'w') as log:
             reader = csv.reader(datafile)
 
             data = OrderedDict()
@@ -63,7 +62,7 @@ class Report:
             for row in reader:
                 try:
                     data[row[0]] = list(map(float, row[1:]))
-                except Exception:
+                except ValueError:
                     log.write('Data of employee with code {0} is invalid.\n'.format(row[0]))
                     errors += 1
 
