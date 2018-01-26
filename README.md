@@ -1,4 +1,4 @@
-## Requirments:
+## Requirements:
 Python 3 or higher.
 
 ## create_data.py
