@@ -1,7 +1,7 @@
 ## Requirements:
 Python 3 or higher.
 
-## create_data.py
+## datawriter.py
 
 The script creates a csv file with pseudo-data of employees and their ratings.
 The script takes one mandatory argument with datafile name and three optional arguments:
@@ -13,14 +13,14 @@ Key -h or --help will open help menu.
 
 ###### Usage example
 ```
-python3 create_data.py data -e 500
+python3 datawriter.py data -e 500
 ```
 Creates datafile data.csv with 30 skills and ratings from 1 to 5 for 500 employees.
 
 
 ## report.py
 
-The script generates report in report.csv file and logs errors.
+The script generates a report and saves it to the report.csv file. It also logs occurred errors to the log.txt file.
 The script takes one mandatory argument with datafile name and one optional argument:
   -g or --group_size - count of skills in skills group.
 Default value of group size is 3.
