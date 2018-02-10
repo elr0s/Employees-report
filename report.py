@@ -3,6 +3,7 @@ import os
 import csv
 import sys
 import argparse
+from statistics import median
 from collections import OrderedDict
 
 
@@ -17,11 +18,12 @@ class Report:
             i = 0
             while len(ratings) > 0:
                 if len(medians) < i + 1:
-                    medians.append(0)
-                medians[i] += sum(ratings[:self.group_size])
+                    medians.append([])
+                medians[i].append(sum(ratings[:self.group_size]))
                 ratings = ratings[self.group_size:]
                 i += 1
-        medians = list(map(lambda x: round(x / len(data), 2), medians))
+        medians = list(map(median, medians))
+        print(medians)
         return medians
 
     def _make_report(self, data, medians):
